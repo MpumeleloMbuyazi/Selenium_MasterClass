@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 public class theStoreTC1 {
 
@@ -38,8 +39,13 @@ public class theStoreTC1 {
             System.setProperty("webdriver.gecko.driver", "Resources" + File.separator  + "geckodriver.exe");
             driver = new FirefoxDriver();
         }
+
+        //Wait for the page to load
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+
         //Gets the URL
         driver.get(URL);
+
         //Maximizes the browser
         driver.manage().window().maximize();
 
@@ -48,9 +54,11 @@ public class theStoreTC1 {
 
     @Test(priority = 1)
     public void loginTest(){
+        WebDriverWait wait = new WebDriverWait(driver, 75);
 
         //Enter the signin credentials and clicks on the signin button
         driver.findElement(By.xpath("//body[1]/div[1]/div[1]/header[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/a[1]")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]")));
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]")).sendKeys("mpumelelo.mbuyazidube@gmail.com");
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[2]/span[1]/input[1]")).sendKeys("Dialectic123");
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/p[2]/button[1]/span[1]")).click();
@@ -72,6 +80,7 @@ public class theStoreTC1 {
 
         //Navigate to the Casual Dresses
         driver.findElement(By.xpath("//body[1]/div[1]/div[1]/header[1]/div[3]/div[1]/div[1]/div[6]/ul[1]/li[2]/a[1]")).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]")));
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/ul[1]/li[1]/a[1]")).click();
 
         JavascriptExecutor js = (JavascriptExecutor)driver;
@@ -103,6 +112,7 @@ public class theStoreTC1 {
     @AfterTest
     public void closeBrowser(){
 
+        //Closes the browser
         driver.close();
     }
 }

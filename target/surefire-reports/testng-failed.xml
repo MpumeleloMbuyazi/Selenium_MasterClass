@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="The Store Test Chrome(failed)" verbose="0">
+    <parameter name="browser" value="chrome"/>
+    <classes>
+      <class name="TheStoreTesting.theStoreTC1">
+        <methods>
+          <include name="closeBrowser"/>
+          <include name="addItemToChartTest"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- TheStoreTesting.theStoreTC1 -->
+    </classes>
+  </test> <!-- The Store Test Chrome(failed) -->
+  <test thread-count="5" name="The Store Test FireFox(failed)" verbose="0">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="TheStoreTesting.theStoreTC1">
+        <methods>
+          <include name="closeBrowser"/>
+          <include name="loginTest"/>
+          <include name="addItemToChartTest"/>
+          <include name="urlTest"/>
+          <include name="openBrowser"/>
+        </methods>
+      </class> <!-- TheStoreTesting.theStoreTC1 -->
+    </classes>
+  </test> <!-- The Store Test FireFox(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->
