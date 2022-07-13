@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class theStoreTC1 {
 
-
+    //Initializing WebDriver
     WebDriver driver;
     String URL = "http://automationpractice.com";
     SoftAssert softAssert = new SoftAssert();
@@ -53,15 +53,18 @@ public class theStoreTC1 {
 
 
     @Test(priority = 1)
-    public void loginTest(){
+    public void loginTest() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 75);
 
+        Thread.sleep(3000);
         //Enter the signin credentials and clicks on the signin button
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//body[1]/div[1]/div[1]/header[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/a[1]")));
         driver.findElement(By.xpath("//body[1]/div[1]/div[1]/header[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/a[1]")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]")));
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[1]/input[1]")).sendKeys("mpumelelo.mbuyazidube@gmail.com");
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/div[2]/span[1]/input[1]")).sendKeys("Dialectic123");
         driver.findElement(By.xpath("//body[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[2]/form[1]/div[1]/p[2]/button[1]/span[1]")).click();
+
 
         //Verify that the user is logged in to the correct account (By customer Name)
         String customerAccountName = driver.findElement(By.xpath("//body[1]/div[1]/div[1]/header[1]/div[2]/div[1]/div[1]/nav[1]/div[1]/a[1]/span[1]")).getText();
@@ -104,7 +107,7 @@ public class theStoreTC1 {
     public void urlTest(){
         //Storing URL in String variable
         String actualURL = driver.getCurrentUrl();
-        //Verify that the url is correct
+        //Verify that the current url is correct
        Assert.assertEquals(actualURL, "http://automationpractice.com/index.php?id_category=9&controller=category", "URL's don't match");
 
     }
